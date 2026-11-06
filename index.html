@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pizzas Alex · Pide tu pizza a domicilio</title>
+<meta name="description" content="Pizzas Alex: prueba una pizza deliciosa y diferente. Pizza perro, lasagna, peperoni, estofada, pollo BBQ con tocineta, tropical y las tradicionales. Domicilios 320 903 4536.">
+<meta name="theme-color" content="#b3001b">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="img/icon-192.png">
+<link rel="apple-touch-icon" href="img/icon-192.png">
+<!-- Vista previa al compartir el enlace -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Pizzas Alex">
+<meta property="og:title" content="Pizzas Alex · Pide tu pizza a domicilio">
+<meta property="og:description" content="Prueba una pizza deliciosa y diferente. Arma tu pedido y envíalo por WhatsApp en un minuto.">
+<meta property="og:url" content="https://pizzas-alex.netlify.app/">
+<meta property="og:image" content="https://pizzas-alex.netlify.app/img/og-pizzas-alex.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://pizzas-alex.netlify.app/img/og-pizzas-alex.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Lobster&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--rojo:#b3001b;--rojo2:#7a0010;--amarillo:#ffd60a;--crema:#fff6dc;--cafe:#4a2410;--txt:#2a1206}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Nunito,system-ui,sans-serif;background:var(--crema);color:var(--txt);padding-bottom:90px}
+img{display:block;max-width:100%}
+button{font:inherit;cursor:pointer;border:0}
+.wrap{max-width:1100px;margin:0 auto;padding:0 16px}
+
+/* Encabezado */
+header{position:sticky;top:0;z-index:40;background:linear-gradient(90deg,var(--rojo2),var(--rojo));color:#fff;box-shadow:0 4px 18px rgba(0,0,0,.25)}
+header .wrap{display:flex;align-items:center;gap:10px;height:62px}
+.marca{display:flex;align-items:baseline;gap:6px;text-decoration:none;color:#fff;flex:1}
+.marca b{font-family:'Lilita One';font-size:26px;letter-spacing:1px;color:#fff;text-shadow:2px 2px 0 var(--rojo2)}
+.marca i{font-family:Lobster;font-style:normal;font-size:30px;color:var(--amarillo);text-shadow:2px 2px 0 #5a0008}
+.pill{background:rgba(255,255,255,.16);color:#fff;border-radius:999px;padding:8px 13px;font-weight:900;font-size:13px}
+.pill.on{background:var(--amarillo);color:var(--rojo2)}
+
+/* Portada con fotos que se mueven */
+.hero{position:relative;height:min(78vh,560px);overflow:hidden;background:#000}
+.hero .slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transform:scale(1.15);transition:opacity 1.4s ease}
+.hero .slide.on{opacity:1;animation:kb 7s linear forwards}
+@keyframes kb{from{transform:scale(1.15) translate(0,0)}to{transform:scale(1.32) translate(-3%,-2%)}}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.15) 0%,rgba(90,0,10,.55) 55%,rgba(90,0,10,.95) 100%)}
+.hero .txt{position:absolute;z-index:2;left:0;right:0;bottom:34px;color:#fff;text-align:center;padding:0 16px}
+.hero .bienv{font-family:'Lilita One';letter-spacing:4px;color:var(--amarillo);font-size:18px}
+.hero h1{font-family:Lobster;font-weight:400;font-size:clamp(34px,7vw,64px);line-height:1.05;margin:8px 0 14px;text-shadow:3px 3px 0 rgba(0,0,0,.35)}
+.btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 22px;border-radius:999px;font-weight:900;font-size:16px;text-decoration:none}
+.btn.am{background:var(--amarillo);color:var(--rojo2);box-shadow:0 6px 0 #c9a400;animation:late 2.2s ease-in-out infinite}
+.btn.bl{background:#fff;color:var(--rojo)}
+.btn.wa{background:#1fae54;color:#fff}
+@keyframes late{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+.dots{position:absolute;z-index:3;top:14px;right:14px;display:flex;gap:6px}
+.dots span{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.45)}
+.dots span.on{background:var(--amarillo);width:22px;border-radius:6px;transition:.3s}
+
+/* Cinta */
+.cinta{background:var(--amarillo);color:var(--rojo2);overflow:hidden;white-space:nowrap;font-family:'Lilita One';font-size:18px;padding:10px 0;border-block:3px solid var(--rojo2)}
+.cinta div{display:inline-block;animation:corre 28s linear infinite}
+.cinta span{margin:0 22px}
+@keyframes corre{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* Secciones */
+section{padding:34px 0 10px}
+h2{font-family:'Lilita One';font-weight:400;font-size:30px;color:var(--rojo);margin-bottom:4px}
+.sub{color:#7a4a2a;margin-bottom:18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.card{background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 10px 26px rgba(122,0,16,.12);display:flex;flex-direction:column;opacity:0;transform:translateY(26px);transition:.6s}
+.card.vis{opacity:1;transform:none}
+.card .foto{position:relative;aspect-ratio:4/3;overflow:hidden}
+.card .foto img{width:100%;height:100%;object-fit:cover;transition:transform .8s}
+.card:hover .foto img{transform:scale(1.1) rotate(1deg)}
+.tag{position:absolute;top:10px;left:10px;background:var(--rojo);color:#fff;font-weight:900;font-size:12px;padding:5px 10px;border-radius:999px}
+.card .cuerpo{padding:14px 16px 16px;display:flex;flex-direction:column;gap:8px;flex:1}
+.card h3{font-family:'Lilita One';font-weight:400;font-size:22px;color:var(--cafe)}
+.card p{font-size:14px;color:#6b4a35;flex:1}
+.tams{display:flex;gap:6px;flex-wrap:wrap}
+.tams button{background:var(--crema);color:var(--cafe);border:2px solid #f0dfb0;border-radius:10px;padding:6px 9px;font-size:13px;font-weight:700}
+.tams button.on{background:var(--rojo);border-color:var(--rojo);color:#fff}
+.precio{font-weight:900;color:var(--rojo)}
+.add{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.add .agregar{flex:1;background:var(--rojo);color:#fff;border-radius:12px;padding:12px;font-weight:900}
+.add .agregar.ok{background:#1fae54}
+
+/* Mitad y mitad */
+.mitad{background:linear-gradient(135deg,var(--rojo2),var(--rojo));color:#fff;border-radius:24px;padding:22px;display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:center}
+.mitad h2{color:var(--amarillo)}
+.mitad .sub{color:#ffd9d9}
+.circulo{position:relative;aspect-ratio:1;border-radius:50%;overflow:hidden;border:6px solid var(--amarillo);box-shadow:0 12px 30px rgba(0,0,0,.35);animation:gira 30s linear infinite}
+.circulo img{position:absolute;top:0;height:100%;width:50%;object-fit:cover}
+.circulo .a{left:0}.circulo .b{right:0}
+.circulo::after{content:"";position:absolute;left:50%;top:0;bottom:0;width:4px;margin-left:-2px;background:var(--amarillo)}
+@keyframes gira{to{transform:rotate(360deg)}}
+select,input,textarea{width:100%;padding:12px;border-radius:12px;border:2px solid #f0dfb0;font:inherit;background:#fff;color:var(--txt)}
+.mitad select{margin:6px 0 10px}
+.mitad label{font-weight:700;font-size:14px}
+
+/* Barra del pedido */
+.barra{position:fixed;left:12px;right:12px;bottom:12px;z-index:50;background:var(--cafe);color:#fff;border-radius:18px;padding:10px 10px 10px 18px;display:flex;align-items:center;gap:10px;box-shadow:0 12px 30px rgba(0,0,0,.35);transform:translateY(140%);transition:.4s}
+.barra.on{transform:none}
+.barra .n{font-weight:900;flex:1}
+.barra button{background:var(--amarillo);color:var(--rojo2);padding:12px 16px;border-radius:12px;font-weight:900}
+.bump{animation:bump .4s}
+@keyframes bump{50%{transform:scale(1.06)}}
+
+/* Hojas (pedido y panel) */
+.velo{position:fixed;inset:0;background:rgba(30,5,0,.6);z-index:60;display:none}
+.velo.on{display:block}
+.hoja{position:fixed;left:0;right:0;bottom:0;z-index:61;background:var(--crema);border-radius:24px 24px 0 0;max-height:92vh;overflow:auto;padding:20px 18px 30px;transform:translateY(105%);transition:.35s;max-width:720px;margin:0 auto}
+.hoja.on{transform:none}
+.hoja h2{display:flex;justify-content:space-between;align-items:center}
+.cerrar{background:#fff;color:var(--rojo);border-radius:50%;width:38px;height:38px;font-weight:900;font-size:18px}
+.item{display:flex;gap:12px;align-items:center;background:#fff;border-radius:14px;padding:8px;margin-bottom:8px}
+.item img{width:58px;height:58px;border-radius:10px;object-fit:cover}
+.item .d{flex:1;font-size:14px}
+.item .d b{display:block;font-size:15px}
+.cant{display:flex;align-items:center;gap:6px}
+.cant button{width:30px;height:30px;border-radius:50%;background:var(--crema);color:var(--rojo);font-weight:900}
+.campos{display:grid;gap:10px;margin:14px 0}
+.campos label{font-weight:700;font-size:14px;display:grid;gap:4px}
+.pagos{display:flex;gap:8px;flex-wrap:wrap}
+.pagos button{background:#fff;border:2px solid #f0dfb0;border-radius:10px;padding:8px 12px;font-weight:700;color:var(--cafe)}
+.pagos button.on{background:var(--rojo);border-color:var(--rojo);color:#fff}
+.total{font-weight:900;font-size:18px;color:var(--rojo);margin:8px 0}
+.enviar{width:100%;background:#1fae54;color:#fff;border-radius:14px;padding:16px;font-weight:900;font-size:17px}
+.nota{font-size:12px;color:#8a6a55;margin-top:8px}
+
+/* Panel del negocio */
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0 14px}
+.kpi{background:#fff;border-radius:14px;padding:10px;text-align:center}
+.kpi b{display:block;font-family:'Lilita One';font-size:26px;color:var(--rojo)}
+.kpi small{font-size:12px;color:#7a4a2a}
+.ped{background:#fff;border-radius:14px;padding:12px;margin-bottom:10px;border-left:6px solid var(--rojo)}
+.ped.Entregado{border-color:#1fae54;opacity:.75}
+.ped.En-camino{border-color:#2b7bd6}
+.ped.En-horno{border-color:#f39c12}
+.ped .top{display:flex;justify-content:space-between;font-size:13px;color:#7a4a2a}
+.ped ul{margin:6px 0 6px 18px;font-size:14px}
+.estados{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.estados button{font-size:12px;padding:6px 9px;border-radius:9px;background:var(--crema);color:var(--cafe);font-weight:700}
+.estados button.on{background:var(--cafe);color:#fff}
+.estados a{font-size:12px;padding:6px 9px;border-radius:9px;background:#1fae54;color:#fff;font-weight:700;text-decoration:none}
+
+footer{margin-top:40px;background:var(--rojo2);color:#ffd9d9;text-align:center;padding:26px 16px 40px;font-size:14px}
+footer b{color:var(--amarillo)}
+footer a{color:#fff}
+.toast{position:fixed;top:76px;left:50%;transform:translate(-50%,-30px);opacity:0;background:var(--cafe);color:#fff;padding:12px 18px;border-radius:12px;z-index:80;font-weight:700;transition:.3s;pointer-events:none}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+@media(max-width:480px){header .wrap{gap:6px;padding:0 10px}.marca b{font-size:19px}.marca i{font-size:23px}.pill{padding:7px 9px;font-size:12px}}
+@media(max-width:640px){.mitad{grid-template-columns:1fr}.circulo{max-width:240px;margin:0 auto}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="marca" href="#inicio"><b>PIZZAS</b><i>Alex</i></a>
+    <button class="pill" id="btnLang">EN</button>
+    <button class="pill" id="btnShare" data-i18n="compartir">Compartir</button>
+    <button class="pill" id="btnPanel" data-i18n="panel">Mis pedidos</button>
+  </div>
+</header>
+
+<div class="hero" id="inicio">
+  <div class="dots" id="dots"></div>
+  <div class="txt">
+    <div class="bienv" data-i18n="bienvenidos">BIENVENIDOS</div>
+    <h1 data-i18n="slogan">“Prueba una pizza deliciosa y diferente”</h1>
+    <div class="btns">
+      <a class="btn am" href="#menu" data-i18n="pedir">Pedir ahora</a>
+      <a class="btn bl" href="tel:+573209034536" data-i18n="llamar">Llamar 320 903 4536</a>
+    </div>
+  </div>
+</div>
+
+<div class="cinta"><div id="cinta"></div></div>
+
+<main class="wrap">
+  <section id="menu">
+    <h2 data-i18n="especiales">Especiales de la casa</h2>
+    <p class="sub" data-i18n="especialesSub">Las que nos hacen diferentes. Escoge el tamaño y agrégala a tu pedido.</p>
+    <div class="grid" id="gridEsp"></div>
+  </section>
+
+  <section>
+    <h2 data-i18n="tradicionales">Las tradicionales</h2>
+    <p class="sub" data-i18n="tradicionalesSub">Los sabores de siempre, hechos a la manera de Alex.</p>
+    <div class="grid" id="gridTrad"></div>
+  </section>
+
+  <section>
+    <div class="mitad">
+      <div>
+        <h2 data-i18n="mitadT">¿No te decides? Mitad y mitad</h2>
+        <p class="sub" data-i18n="mitadSub">Arma tu pizza con dos sabores.</p>
+        <label data-i18n="sabor1">Primer sabor</label>
+        <select id="m1"></select>
+        <label data-i18n="sabor2">Segundo sabor</label>
+        <select id="m2"></select>
+        <label data-i18n="tamano">Tamaño</label>
+        <div class="tams" id="mTam" style="margin:6px 0 14px"></div>
+        <button class="btn am" id="mAdd" data-i18n="agregarMitad">Agregar mitad y mitad</button>
+      </div>
+      <div class="circulo"><img class="a" id="mA" alt=""><img class="b" id="mB" alt=""></div>
+    </div>
+  </section>
+
+  <section>
+    <h2 data-i18n="comoT">Así de fácil pides</h2>
+    <div class="grid" id="pasos"></div>
+  </section>
+</main>
+
+<footer>
+  <p><b>Pizzas Alex</b> · <span data-i18n="domicilios">Domicilios</span>: <a href="tel:+573209034536">320 903 4536</a></p>
+  <p style="margin-top:10px"><span data-i18n="hecho">App hecha por</span> <a href="https://vibraspositivashm.com" target="_blank" rel="noopener">Vibras Positivas HM</a></p>
+</footer>
+
+<div class="barra" id="barra">
+  <span class="n" id="barraN"></span>
+  <button id="verPedido" data-i18n="verPedido">Ver mi pedido</button>
+</div>
+
+<div class="velo" id="velo"></div>
+
+<!-- Hoja del pedido -->
+<div class="hoja" id="hojaPedido">
+  <h2><span data-i18n="tuPedido">Tu pedido</span><button class="cerrar" data-close>×</button></h2>
+  <div id="items"></div>
+  <div class="total" id="total"></div>
+  <div class="campos">
+    <label><span data-i18n="nombre">Tu nombre</span><input id="fNombre" autocomplete="name"></label>
+    <label><span data-i18n="telefono">Tu celular</span><input id="fTel" type="tel" inputmode="tel" autocomplete="tel"></label>
+    <label><span data-i18n="direccion">Dirección y barrio</span><input id="fDir" autocomplete="street-address"></label>
+    <label><span data-i18n="referencia">Punto de referencia</span><input id="fRef"></label>
+    <div><b style="font-size:14px" data-i18n="pago">¿Cómo pagas?</b>
+      <div class="pagos" id="pagos" style="margin-top:6px"></div></div>
+    <label><span data-i18n="notas">Notas (sin cebolla, salsa aparte…)</span><textarea id="fNotas" rows="2"></textarea></label>
+  </div>
+  <button class="enviar" id="enviar" data-i18n="enviar">Enviar pedido por WhatsApp</button>
+  <p class="nota" data-i18n="notaEnvio">Se abre WhatsApp con tu pedido listo. Alex te confirma el valor y el tiempo de entrega.</p>
+</div>
+
+<!-- Panel del negocio -->
+<div class="hoja" id="hojaPanel">
+  <h2><span data-i18n="panelT">Pedidos de Pizzas Alex</span><button class="cerrar" data-close>×</button></h2>
+  <div class="kpis">
+    <div class="kpi"><b id="kHoy">0</b><small data-i18n="kHoy">Pedidos hoy</small></div>
+    <div class="kpi"><b id="kPend">0</b><small data-i18n="kPend">Por entregar</small></div>
+    <div class="kpi"><b id="kPizzas">0</b><small data-i18n="kPizzas">Pizzas hoy</small></div>
+  </div>
+  <div class="btns" style="justify-content:flex-start;margin-bottom:12px">
+    <button class="pill on" id="fHoy" data-i18n="filHoy">Hoy</button>
+    <button class="pill on" style="background:#fff;color:var(--rojo)" id="fTodos" data-i18n="filTodos">Todos</button>
+    <button class="pill on" style="background:#fff;color:var(--rojo)" id="exportar" data-i18n="exportar">Descargar Excel (CSV)</button>
+  </div>
+  <div id="listaPed"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============ CONFIGURACIÓN DEL NEGOCIO (editar aquí) ============ */
+const NEGOCIO = {
+  whatsapp: '573209034536',
+  url: 'https://pizzas-alex.netlify.app/',
+  pin: '1234',              // PIN para abrir "Mis pedidos" en el celular de Alex
+  // Tamaños y precios: pon el valor en pesos, o null para "precio por WhatsApp"
+  tamanos: [
+    { id:'personal', es:'Personal', en:'Personal' },
+    { id:'mediana',  es:'Mediana',  en:'Medium' },
+    { id:'grande',   es:'Grande',   en:'Large' },
+    { id:'familiar', es:'Familiar', en:'Family' }
+  ],
+  precios: {
+    // ejemplo: perro: { personal: 15000, mediana: 30000, grande: 42000, familiar: 55000 },
+  }
+};
+
+const PIZZAS = [
+  { id:'perro', img:'perro', cat:'esp', tag:{es:'La más pedida',en:'Best seller'},
+    es:['Pizza Perro','Con el sabor del perro caliente: salchicha, queso y salsas por encima.'],
+    en:['Hot Dog Pizza','All the flavor of a hot dog: sausage, cheese and sauces on top.'] },
+  { id:'lasagna', img:'lasagna', cat:'esp',
+    es:['Pizza Lasagna','Carne en salsa y mucho queso gratinado, como una lasagna.'],
+    en:['Lasagna Pizza','Meat sauce and plenty of melted cheese, just like lasagna.'] },
+  { id:'peperoni', img:'peperoni', cat:'esp',
+    es:['Pizza Peperoni','Cubierta de peperoni con queso derretido de borde a borde.'],
+    en:['Pepperoni Pizza','Loaded with pepperoni and melted cheese edge to edge.'] },
+  { id:'estofada', img:'estofada', cat:'esp', tag:{es:'Diferente',en:'Unique'},
+    es:['Pizza Estofada','Rellena y cerrada, dorada al horno. Para los que quieren algo distinto.'],
+    en:['Stuffed Pizza','Filled, closed and golden from the oven. For something different.'] },
+  { id:'peperonata', img:'peperoni', cat:'esp',
+    es:['Pizza Peperonata','Peperoni con el toque de la casa.'],
+    en:['Peperonata Pizza','Pepperoni with the house touch.'] },
+  { id:'bbq', img:'bbq', cat:'esp', tag:{es:'Favorita',en:'Favorite'},
+    es:['Pollo BBQ con Tocineta','Pollo, tocineta y salsa BBQ en espiral.'],
+    en:['BBQ Chicken & Bacon','Chicken, bacon and a swirl of BBQ sauce.'] },
+  { id:'tropical', img:'tropical', cat:'esp',
+    es:['Pizza Tropical','Con frutas sobre el queso: dulce y diferente.'],
+    en:['Tropical Pizza','Fruit over cheese: sweet and different.'] },
+  { id:'jamon', img:'jamon', cat:'trad',
+    es:['Jamón','La clásica de jamón y queso.'],
+    en:['Ham','The classic ham and cheese.'] },
+  { id:'hawaiana', img:'hawaiana', cat:'trad',
+    es:['Hawaiana','Jamón, piña y queso.'],
+    en:['Hawaiian','Ham, pineapple and cheese.'] },
+  { id:'pollo', img:'pollo-champinones', cat:'trad',
+    es:['Pollo con Champiñones','Pollo y champiñones con queso.'],
+    en:['Chicken & Mushrooms','Chicken and mushrooms with cheese.'] },
+  { id:'maicitos', img:'pollo-champinones', cat:'trad',
+    es:['Maicitos','Maíz tierno con queso, la que piden los niños.'],
+    en:['Sweet Corn','Sweet corn and cheese, a kids favorite.'] }
+];
+
+/* ============ TEXTOS ES / EN ============ */
+const T = {
+  es:{bienvenidos:'BIENVENIDOS',slogan:'“Prueba una pizza deliciosa y diferente”',pedir:'Pedir ahora',llamar:'Llamar 320 903 4536',
+    especiales:'Especiales de la casa',especialesSub:'Las que nos hacen diferentes. Escoge el tamaño y agrégala a tu pedido.',
+    tradicionales:'Las tradicionales',tradicionalesSub:'Los sabores de siempre, hechos a la manera de Alex.',
+    mitadT:'¿No te decides? Mitad y mitad',mitadSub:'Arma tu pizza con dos sabores.',sabor1:'Primer sabor',sabor2:'Segundo sabor',tamano:'Tamaño',
+    agregarMitad:'Agregar mitad y mitad',comoT:'Así de fácil pides',domicilios:'Domicilios',hecho:'App hecha por',
+    verPedido:'Ver mi pedido',tuPedido:'Tu pedido',nombre:'Tu nombre',telefono:'Tu celular',direccion:'Dirección y barrio',
+    referencia:'Punto de referencia',pago:'¿Cómo pagas?',notas:'Notas (sin cebolla, salsa aparte…)',enviar:'Enviar pedido por WhatsApp',
+    notaEnvio:'Se abre WhatsApp con tu pedido listo. Alex te confirma el valor y el tiempo de entrega.',
+    panel:'Mis pedidos',panelT:'Pedidos de Pizzas Alex',kHoy:'Pedidos hoy',kPend:'Por entregar',kPizzas:'Pizzas hoy',
+    filHoy:'Hoy',filTodos:'Todos',exportar:'Descargar Excel (CSV)',compartir:'Compartir',
+    agregar:'Agregar',agregado:'¡Agregada!',consultar:'Precio por WhatsApp',porConfirmar:'por confirmar',
+    pizzas:n=>n===1?'1 pizza en tu pedido':n+' pizzas en tu pedido',vacio:'Tu pedido está vacío',falta:'Escribe tu nombre y dirección',
+    mitadDe:'Mitad',pagosL:['Efectivo','Nequi','Daviplata','Transferencia'],
+    pasos:[['Escoge','Mira las fotos y escoge tus sabores y tamaño.','bbq'],['Envía','Tu pedido sale por WhatsApp, listo y sin errores.','peperoni'],['Disfruta','Te la llevamos calientica hasta tu casa.','tropical']],
+    estados:['Nuevo','En horno','En camino','Entregado'],pinQ:'PIN del negocio',pinMal:'PIN incorrecto',guardado:'Pedido guardado en Mis pedidos',
+    yaEstaba:'Ese pedido ya estaba guardado',sinPed:'Aún no hay pedidos. Cuando llegue uno por WhatsApp, toca el enlace "Guardar pedido" del mensaje.',
+    avisar:'Avisar al cliente',copiado:'Enlace copiado'},
+  en:{bienvenidos:'WELCOME',slogan:'“Try a delicious, different pizza”',pedir:'Order now',llamar:'Call 320 903 4536',
+    especiales:'House specials',especialesSub:'The ones that make us different. Pick a size and add it to your order.',
+    tradicionales:'The classics',tradicionalesSub:'Classic flavors, made Alex’s way.',
+    mitadT:'Can’t decide? Half and half',mitadSub:'Build your pizza with two flavors.',sabor1:'First flavor',sabor2:'Second flavor',tamano:'Size',
+    agregarMitad:'Add half and half',comoT:'Ordering is easy',domicilios:'Delivery',hecho:'App made by',
+    verPedido:'View my order',tuPedido:'Your order',nombre:'Your name',telefono:'Your phone',direccion:'Address and neighborhood',
+    referencia:'Landmark',pago:'How will you pay?',notas:'Notes (no onion, sauce on the side…)',enviar:'Send order on WhatsApp',
+    notaEnvio:'WhatsApp opens with your order ready. Alex will confirm the price and delivery time.',
+    panel:'My orders',panelT:'Pizzas Alex orders',kHoy:'Orders today',kPend:'To deliver',kPizzas:'Pizzas today',
+    filHoy:'Today',filTodos:'All',exportar:'Download Excel (CSV)',compartir:'Share',
+    agregar:'Add',agregado:'Added!',consultar:'Price on WhatsApp',porConfirmar:'to be confirmed',
+    pizzas:n=>n===1?'1 pizza in your order':n+' pizzas in your order',vacio:'Your order is empty',falta:'Please enter your name and address',
+    mitadDe:'Half',pagosL:['Cash','Nequi','Daviplata','Bank transfer'],
+    pasos:[['Choose','Look at the photos and pick your flavors and size.','bbq'],['Send','Your order goes out on WhatsApp, ready and error-free.','peperoni'],['Enjoy','We bring it hot to your door.','tropical']],
+    estados:['New','In the oven','On the way','Delivered'],pinQ:'Business PIN',pinMal:'Wrong PIN',guardado:'Order saved in My orders',
+    yaEstaba:'That order was already saved',sinPed:'No orders yet. When one arrives on WhatsApp, tap the "Save order" link in the message.',
+    avisar:'Notify customer',copiado:'Link copied'}
+};
+const ESTADO_ID = ['Nuevo','En-horno','En-camino','Entregado'];
+
+/* ============ ESTADO ============ */
+let lang = localStorage.getItem('pa_lang') || 'es';
+let pedido = JSON.parse(localStorage.getItem('pa_pedido') || '[]');
+let pago = 0;
+const $ = s => document.querySelector(s);
+const t = k => T[lang][k];
+const pz = id => PIZZAS.find(p => p.id === id);
+const nombreP = p => p[lang][0];
+const tamN = id => (NEGOCIO.tamanos.find(x => x.id === id) || {})[lang] || id;
+const precio = (id, tam) => (NEGOCIO.precios[id] || {})[tam] ?? null;
+const pesos = v => '$' + Math.round(v).toLocaleString('es-CO');
+function toast(m){const e=$('#toast');e.textContent=m;e.classList.add('on');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('on'),2200)}
+function guardar(){localStorage.setItem('pa_pedido',JSON.stringify(pedido));pintarBarra()}
+
+/* Hora real de Colombia */
+const ahoraCO = () => new Date().toLocaleString('sv-SE',{timeZone:'America/Bogota'}).slice(0,16);
+const hoyCO = () => ahoraCO().slice(0,10);
+
+/* ============ PORTADA ============ */
+const fotosHero = ['bbq','peperoni','tropical','perro','hawaiana','lasagna'];
+function hero(){
+  const h=$('.hero'), d=$('#dots');
+  fotosHero.forEach((f,i)=>{const s=document.createElement('div');s.className='slide'+(i?'':' on');s.style.backgroundImage=`url(img/${f}.jpg)`;h.prepend(s);d.insertAdjacentHTML('beforeend',`<span class="${i?'':'on'}"></span>`)});
+  const sl=[...h.querySelectorAll('.slide')].reverse(), ds=[...d.children]; let i=0;
+  setInterval(()=>{sl[i].classList.remove('on');ds[i].classList.remove('on');i=(i+1)%sl.length;sl[i].classList.add('on');ds[i].classList.add('on')},5000);
+}
+
+/* ============ MENÚ ============ */
+function tarjeta(p){
+  const sel = NEGOCIO.tamanos[1].id;
+  const pr = precio(p.id, sel);
+  return `<article class="card" data-id="${p.id}" data-tam="${sel}">
+    <div class="foto"><img src="img/${p.img}.jpg" alt="${nombreP(p)}" loading="lazy">${p.tag?`<span class="tag">${p.tag[lang]}</span>`:''}</div>
+    <div class="cuerpo"><h3>${nombreP(p)}</h3><p>${p[lang][1]}</p>
+      <div class="tams">${NEGOCIO.tamanos.map(x=>`<button data-t="${x.id}" class="${x.id===sel?'on':''}">${x[lang]}</button>`).join('')}</div>
+      <div class="precio">${pr!=null?pesos(pr):t('consultar')}</div>
+      <div class="add"><button class="agregar">${t('agregar')}</button></div>
+    </div></article>`;
+}
+function pintarMenu(){
+  $('#gridEsp').innerHTML = PIZZAS.filter(p=>p.cat==='esp').map(tarjeta).join('');
+  $('#gridTrad').innerHTML = PIZZAS.filter(p=>p.cat==='trad').map(tarjeta).join('');
+  document.querySelectorAll('.card').forEach(c=>obs.observe(c));
+  $('#cinta').innerHTML = (PIZZAS.map(p=>`<span>${nombreP(p).toUpperCase()}</span>`).join('')).repeat(2);
+  const ops = PIZZAS.map(p=>`<option value="${p.id}">${nombreP(p)}</option>`).join('');
+  const v1=$('#m1').value||'bbq', v2=$('#m2').value||'hawaiana';
+  $('#m1').innerHTML=ops; $('#m2').innerHTML=ops; $('#m1').value=v1; $('#m2').value=v2;
+  const mt=$('#mTam').dataset.t||'grande';
+  $('#mTam').dataset.t=mt;
+  $('#mTam').innerHTML=NEGOCIO.tamanos.map(x=>`<button data-t="${x.id}" class="${x.id===mt?'on':''}">${x[lang]}</button>`).join('');
+  pintarMitad();
+  $('#pasos').innerHTML = t('pasos').map((p,i)=>`<article class="card vis"><div class="foto"><img src="img/${p[2]}.jpg" alt="" loading="lazy"><span class="tag">${i+1}</span></div><div class="cuerpo"><h3>${p[0]}</h3><p>${p[1]}</p></div></article>`).join('');
+}
+const obs = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target)}}),{threshold:.15});
+
+document.addEventListener('click', e=>{
+  const card = e.target.closest('.card[data-id]');
+  if(card && e.target.matches('.tams button')){
+    card.dataset.tam=e.target.dataset.t;
+    card.querySelectorAll('.tams button').forEach(b=>b.classList.toggle('on',b===e.target));
+    const pr=precio(card.dataset.id,card.dataset.tam);
+    card.querySelector('.precio').textContent = pr!=null?pesos(pr):t('consultar');
+  }
+  if(card && e.target.matches('.agregar')){
+    agregar({id:card.dataset.id, tam:card.dataset.tam});
+    e.target.textContent=t('agregado'); e.target.classList.add('ok');
+    setTimeout(()=>{e.target.textContent=t('agregar');e.target.classList.remove('ok')},1300);
+  }
+  if(e.target.closest('#mTam') && e.target.dataset.t){
+    $('#mTam').dataset.t=e.target.dataset.t;
+    $('#mTam').querySelectorAll('button').forEach(b=>b.classList.toggle('on',b===e.target));
+  }
+  if(e.target.matches('[data-close]') || e.target.id==='velo') cerrarHojas();
+});
+
+function agregar(linea){
+  const ex = pedido.find(l=>l.id===linea.id && l.tam===linea.tam && l.b===linea.b);
+  if(ex) ex.n++; else pedido.push({...linea,n:1});
+  guardar(); const b=$('#barra'); b.classList.remove('bump'); void b.offsetWidth; b.classList.add('bump');
+}
+
+/* Mitad y mitad */
+function pintarMitad(){ $('#mA').src=`img/${pz($('#m1').value).img}.jpg`; $('#mB').src=`img/${pz($('#m2').value).img}.jpg`; }
+$('#m1').onchange=$('#m2').onchange=pintarMitad;
+$('#mAdd').onclick=()=>{ agregar({id:$('#m1').value,b:$('#m2').value,tam:$('#mTam').dataset.t}); toast(t('agregado')); };
+
+/* ============ PEDIDO ============ */
+const nombreLinea = l => l.b ? `${t('mitadDe')} ${nombreP(pz(l.id))} / ${t('mitadDe')} ${nombreP(pz(l.b))}` : nombreP(pz(l.id));
+const precioLinea = l => { if(l.b){const a=precio(l.id,l.tam),b=precio(l.b,l.tam);return a!=null&&b!=null?Math.max(a,b):null} return precio(l.id,l.tam); };
+function pintarBarra(){
+  const n = pedido.reduce((s,l)=>s+l.n,0);
+  $('#barra').classList.toggle('on', n>0);
+  $('#barraN').textContent = t('pizzas')(n);
+}
+function totalPedido(){ let s=0; for(const l of pedido){const p=precioLinea(l); if(p==null) return null; s+=p*l.n} return s; }
+function pintarPedido(){
+  $('#items').innerHTML = pedido.length ? pedido.map((l,i)=>`<div class="item"><img src="img/${pz(l.id).img}.jpg" alt="">
+    <div class="d"><b>${nombreLinea(l)}</b>${tamN(l.tam)}${precioLinea(l)!=null?' · '+pesos(precioLinea(l)):''}</div>
+    <div class="cant"><button data-menos="${i}">−</button><b>${l.n}</b><button data-mas="${i}">+</button></div></div>`).join('') : `<p>${t('vacio')}</p>`;
+  const tot = totalPedido();
+  $('#total').textContent = 'Total: ' + (tot!=null ? pesos(tot) : t('porConfirmar'));
+  $('#pagos').innerHTML = t('pagosL').map((p,i)=>`<button data-pago="${i}" class="${i===pago?'on':''}">${p}</button>`).join('');
+  const c = JSON.parse(localStorage.getItem('pa_cliente')||'{}');
+  ['Nombre','Tel','Dir','Ref'].forEach(k=>{ if(!$('#f'+k).value && c[k]) $('#f'+k).value=c[k]; });
+}
+$('#items').onclick=e=>{
+  const m=e.target.dataset.menos, p=e.target.dataset.mas;
+  if(m!=null){pedido[m].n--; if(pedido[m].n<=0) pedido.splice(m,1)}
+  if(p!=null) pedido[p].n++;
+  guardar(); pintarPedido(); if(!pedido.length) cerrarHojas();
+};
+$('#pagos').onclick=e=>{ if(e.target.dataset.pago){pago=+e.target.dataset.pago;pintarPedido()} };
+$('#verPedido').onclick=()=>{pintarPedido();abrir('#hojaPedido')};
+function abrir(s){$('#velo').classList.add('on');$(s).classList.add('on')}
+function cerrarHojas(){$('#velo').classList.remove('on');document.querySelectorAll('.hoja').forEach(h=>h.classList.remove('on'))}
+
+/* Codificar el pedido para el enlace "Guardar pedido" */
+const enc = o => btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+const dec = s => JSON.parse(decodeURIComponent(escape(atob(s.replace(/-/g,'+').replace(/_/g,'/')))));
+
+$('#enviar').onclick=()=>{
+  if(!pedido.length) return toast(t('vacio'));
+  const c={Nombre:$('#fNombre').value.trim(),Tel:$('#fTel').value.trim(),Dir:$('#fDir').value.trim(),Ref:$('#fRef').value.trim()};
+  if(!c.Nombre||!c.Dir) return toast(t('falta'));
+  localStorage.setItem('pa_cliente',JSON.stringify(c));
+  const notas=$('#fNotas').value.trim(), tot=totalPedido(), fecha=ahoraCO();
+  const reg={i:Date.now().toString(36),f:fecha,c:c.Nombre,t:c.Tel,d:c.Dir,r:c.Ref,p:T.es.pagosL[pago],o:notas,
+    l:pedido.map(l=>({x:(l.b?`Mitad ${nombreP2(l.id)} / Mitad ${nombreP2(l.b)}`:nombreP2(l.id)),z:tamES(l.tam),n:l.n})),v:tot};
+  const lineas = pedido.map(l=>`• ${l.n} x ${nombreLinea(l)} (${tamN(l.tam)})`).join('\n');
+  const msg = `*PEDIDO PIZZAS ALEX*\n${fecha.replace('T',' ')}\n\n${lineas}\n\n*Total:* ${tot!=null?pesos(tot):t('porConfirmar')}\n\n`+
+    `*${t('nombre')}:* ${c.Nombre}\n*${t('telefono')}:* ${c.Tel||'-'}\n*${t('direccion')}:* ${c.Dir}\n*${t('referencia')}:* ${c.Ref||'-'}\n*${t('pago')}* ${t('pagosL')[pago]}`+
+    (notas?`\n*Notas:* ${notas}`:'')+`\n\nGuardar pedido (para Alex):\n${NEGOCIO.url}#g=${enc(reg)}`;
+  window.open(`https://wa.me/${NEGOCIO.whatsapp}?text=${encodeURIComponent(msg)}`,'_blank');
+  pedido=[]; guardar(); cerrarHojas();
+};
+const nombreP2 = id => pz(id).es[0];
+const tamES = id => (NEGOCIO.tamanos.find(x=>x.id===id)||{}).es||id;
+
+/* ============ PANEL DEL NEGOCIO ============ */
+let pedidos = JSON.parse(localStorage.getItem('pa_pedidos')||'[]');
+let soloHoy = true;
+const guardarPed = () => localStorage.setItem('pa_pedidos',JSON.stringify(pedidos));
+function desbloquear(){
+  if(sessionStorage.getItem('pa_ok')) return true;
+  const p = prompt(t('pinQ')); if(p===NEGOCIO.pin){sessionStorage.setItem('pa_ok','1');return true}
+  if(p!==null) toast(t('pinMal')); return false;
+}
+function pintarPanel(){
+  const hoy=hoyCO(), dehoy=pedidos.filter(p=>p.f.startsWith(hoy));
+  $('#kHoy').textContent=dehoy.length;
+  $('#kPend').textContent=pedidos.filter(p=>(p.e||0)<3).length;
+  $('#kPizzas').textContent=dehoy.reduce((s,p)=>s+p.l.reduce((a,l)=>a+l.n,0),0);
+  $('#fHoy').style.cssText = soloHoy?'':'background:#fff;color:var(--rojo)';
+  $('#fTodos').style.cssText = soloHoy?'background:#fff;color:var(--rojo)':'';
+  const lista=(soloHoy?dehoy:pedidos).slice().sort((a,b)=>b.f.localeCompare(a.f));
+  $('#listaPed').innerHTML = lista.length ? lista.map(p=>{
+    const e=p.e||0, tel=(p.t||'').replace(/\D/g,''), tel57=tel.length===10?'57'+tel:tel;
+    const aviso=encodeURIComponent(`Hola ${p.c}, tu pedido de Pizzas Alex está: ${T.es.estados[e]}. ¡Gracias por pedirnos!`);
+    return `<div class="ped ${ESTADO_ID[e]}"><div class="top"><span>${p.f.replace('T',' ')}</span><b>${t('estados')[e]}</b></div>
+      <b>${p.c}</b> · ${p.d}${p.r?' ('+p.r+')':''}<ul>${p.l.map(l=>`<li>${l.n} x ${l.x} (${l.z})</li>`).join('')}</ul>
+      <small>${p.p}${p.o?' · '+p.o:''}${p.v!=null?' · '+pesos(p.v):''}</small>
+      <div class="estados">${t('estados').map((s,i)=>`<button data-ped="${p.i}" data-e="${i}" class="${i===e?'on':''}">${s}</button>`).join('')}
+      ${tel57?`<a href="https://wa.me/${tel57}?text=${aviso}" target="_blank">${t('avisar')}</a>`:''}</div></div>`}).join('') : `<p>${t('sinPed')}</p>`;
+}
+$('#listaPed').onclick=e=>{ const id=e.target.dataset.ped; if(!id) return; pedidos.find(p=>p.i===id).e=+e.target.dataset.e; guardarPed(); pintarPanel(); };
+$('#fHoy').onclick=()=>{soloHoy=true;pintarPanel()};
+$('#fTodos').onclick=()=>{soloHoy=false;pintarPanel()};
+$('#btnPanel').onclick=()=>{ if(desbloquear()){pintarPanel();abrir('#hojaPanel')} };
+$('#exportar').onclick=()=>{
+  const filas=[['Fecha','Cliente','Celular','Dirección','Referencia','Pizzas','Pago','Notas','Valor','Estado']].concat(
+    pedidos.map(p=>[p.f.replace('T',' '),p.c,p.t,p.d,p.r,p.l.map(l=>`${l.n} x ${l.x} (${l.z})`).join(' | '),p.p,p.o,p.v??'',T.es.estados[p.e||0]]));
+  const csv='﻿'+filas.map(f=>f.map(v=>`"${String(v??'').replace(/"/g,'""')}"`).join(';')).join('\n');
+  const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'})); a.download=`pedidos-pizzas-alex-${hoyCO()}.csv`; a.click();
+};
+function revisarEnlace(){
+  const m=location.hash.match(/^#g=(.+)$/); if(!m) return;
+  history.replaceState(null,'',location.pathname);
+  try{
+    const reg=dec(m[1]);
+    if(!desbloquear()) return;
+    if(pedidos.some(p=>p.i===reg.i)) toast(t('yaEstaba')); else {reg.e=0;pedidos.push(reg);guardarPed();toast(t('guardado'))}
+    pintarPanel(); abrir('#hojaPanel');
+  }catch(err){console.warn(err)}
+}
+
+/* ============ IDIOMA Y COMPARTIR ============ */
+function aplicarIdioma(){
+  document.documentElement.lang=lang;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{const v=T[lang][el.dataset.i18n]; if(typeof v==='string') el.textContent=v});
+  $('#btnLang').textContent = lang==='es'?'EN':'ES';
+  pintarMenu(); pintarBarra();
+}
+$('#btnLang').onclick=()=>{lang=lang==='es'?'en':'es';localStorage.setItem('pa_lang',lang);aplicarIdioma()};
+$('#btnShare').onclick=async()=>{
+  const d={title:'Pizzas Alex',text:T[lang].slogan,url:NEGOCIO.url};
+  try{ if(navigator.share) await navigator.share(d); else {await navigator.clipboard.writeText(NEGOCIO.url);toast(t('copiado'))} }catch(e){}
+};
+
+/* ============ ARRANQUE ============ */
+hero(); aplicarIdioma(); revisarEnlace();
+window.addEventListener('hashchange',revisarEnlace);
+if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+</script>
+</body>
+</html>
